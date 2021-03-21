@@ -36,9 +36,9 @@ def one_hot(): #热编码
         for row in csv_reader:
             source_target.append(handleLabel(row))
         source_target = to_categorical(source_target)
-    # print(source_target)
+    # print(source_target[0])
     np_data = [np.argmax(one_hot) for one_hot in source_target]
-    # print(type(np_data))
+    # print(np_data)
     for i in range(len(np_data)):
         if np_data[i] != 0:
             np_data[i] = 1
@@ -62,6 +62,8 @@ def birch(data):
     labels = birch.fit_predict(X)
     print(Counter(labels))
     return labels
+
+
 
 def ent(array, values, num_label):
     count = 0
@@ -106,11 +108,11 @@ def trainAndtest(data_X, data_y, batch_size):
     )
     train_dataloader = DataLoader(train_dataset, batch_size, shuffle=True)
     test_dataloader = DataLoader(test_dataset, batch_size, shuffle=True)
-    return train_dataloader, test_dataloader
+    return train_dataloader, test_dataloader, len(X_train), len(X_test)
 
 
 if __name__ == '__main__':
-    # label = one_hot()
+    label = one_hot()
     data = getdata()
     # print(data)
     # birch(data)
@@ -121,5 +123,5 @@ if __name__ == '__main__':
     #     # print(data.iloc[0:20000, i].tolist())
     #     shannoEntarray.append(InformationGain(data, birch(data.iloc[0:20000, [i, 41]])).getEnt())
     # print(shannoEntarray)
-    dataset = trainAndtest(data, data[41])
+    # dataset = trainAndtest(data, data[41])
     # print(InformationGain(data, birch(data)).getEnt())

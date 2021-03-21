@@ -9,10 +9,11 @@ import ShannonAndBirch
 # 神经网络参数
 batch_size = 128
 learning_rate = 1e-3
-num_epoches = 50
+num_epoches = 40
 USE_GPU = torch.cuda.is_available()
 datas = ShannonAndBirch.getdata()
 dataset = ShannonAndBirch.trainAndtest(datas, datas[41], batch_size)
+print(type(dataset[0]))
 model = CNN(1, 2)
 if USE_GPU:
     model = model.cuda()
@@ -49,7 +50,7 @@ def train():
             optimizer.step()
 
         print('Finish {} epoch, Loss: {:.6f}, Acc: {:.6f}'.format(
-            epoch + 1, running_loss / 28000, running_acc / 28000))
+            epoch + 1, running_loss / dataset[2], running_acc / dataset[2]))
         model.eval()
         eval_loss = 0
         eval_acc = 0
@@ -67,7 +68,7 @@ def train():
             _, pred = torch.max(out, 1)
             num_correct = (pred == label).sum()
             eval_acc += num_correct.item()
-        print('Test Loss: {:.6f}, Acc: {:.6f}'.format(eval_loss / 12000, eval_acc / 12000))
+        print('Test Loss: {:.6f}, Acc: {:.6f}'.format(eval_loss / dataset[3], eval_acc / dataset[3]))
         print()
 
 
