@@ -86,9 +86,7 @@ def one_hot(): #热编码
         for row in csv_reader:
             source_target.append(handleLabel(row))
         source_target = to_categorical(source_target)
-    # print(source_target)
     np_data = [np.argmax(one_hot) for one_hot in source_target]
-    # print(type(np_data))
     for i in range(len(np_data)):
         if np_data[i] != 0:
             np_data[i] = 1
@@ -98,7 +96,7 @@ if __name__ == '__main__':
     start_time = time.process_time()
     global label_list  # 声明一个全局变量的列表并初始化为空
     label_list = []
-    preHandel_data()
+    # preHandel_data()
     label = one_hot()
     end_time = time.process_time()
     print("Running time:", (end_time - start_time))  # 输出程序运行时间

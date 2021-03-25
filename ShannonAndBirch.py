@@ -115,13 +115,13 @@ if __name__ == '__main__':
     label = one_hot()
     data = getdata()
     # print(data)
-    # birch(data)
+    birch(data)
     # # print(type(birch(data)), type(label))
-    # shannoEntarray = []
-    # for i in range(0, data.shape[1]-1):
-    #     print(i)
-    #     # print(data.iloc[0:20000, i].tolist())
-    #     shannoEntarray.append(InformationGain(data, birch(data.iloc[0:20000, [i, 41]])).getEnt())
-    # print(shannoEntarray)
+    shannoEntarray = []
+    for i in range(0, data.shape[1]-1):
+        # print(i)
+        # print(data.iloc[0:20000, i].tolist())
+        shannoEntarray.append(InformationGain(data, birch(data.iloc[0:20000, [i, 41]])).getEnt())
+    print(shannoEntarray)
     # dataset = trainAndtest(data, data[41])
-    # print(InformationGain(data, birch(data)).getEnt())
+    print(InformationGain(data, birch(data)).getEnt())
